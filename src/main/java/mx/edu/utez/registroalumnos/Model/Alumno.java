@@ -13,7 +13,7 @@ public class Alumno {
     public Alumno() {
     }
 
-    public Alumno(int id_persona, String nombre, String appellido_paterno, String appellido_materno, int edad, String matricula, String sexo, String correo) {
+    public Alumno( int id_alumno,String nombre, String appellido_paterno, String appellido_materno, int edad, String matricula, String sexo, String correo) {
         this.nombre = nombre;
         this.id_alumno = id_alumno;
         this.appellido_paterno = appellido_paterno;
@@ -22,14 +22,6 @@ public class Alumno {
         this.matricula = matricula;
         this.sexo = sexo;
         this.correo = correo;
-    }
-
-    public int getId_alumno() {
-        return id_alumno;
-    }
-
-    public void setId_alumno(int id_alumno) {
-        this.id_alumno = id_alumno;
     }
 
     @Override
