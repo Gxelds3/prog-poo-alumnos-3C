@@ -1,7 +1,7 @@
 package mx.edu.utez.registroalumnos.Model;
 
-public class Persona {
-    private int id_persona;
+public class Alumno {
+    private int id_alumno;
     private String nombre;
     private String appellido_paterno;
     private String appellido_materno;
@@ -10,12 +10,12 @@ public class Persona {
     private String correo;
     private String sexo;
 
-    public Persona() {
+    public Alumno() {
     }
 
-    public Persona( int id_persona,String nombre, String appellido_paterno, String appellido_materno, int edad, String matricula, String sexo, String correo) {
+    public Alumno(int id_persona, String nombre, String appellido_paterno, String appellido_materno, int edad, String matricula, String sexo, String correo) {
         this.nombre = nombre;
-        this.id_persona = id_persona;
+        this.id_alumno = id_alumno;
         this.appellido_paterno = appellido_paterno;
         this.appellido_materno = appellido_materno;
         this.edad = edad;
@@ -24,9 +24,17 @@ public class Persona {
         this.correo = correo;
     }
 
+    public int getId_alumno() {
+        return id_alumno;
+    }
+
+    public void setId_alumno(int id_alumno) {
+        this.id_alumno = id_alumno;
+    }
+
     @Override
     public String toString() {
-        return  id_persona + ' ' +nombre + ' ' + appellido_paterno + ' ' + appellido_materno+ ' ' +  edad + ' ' + matricula + ' ' + correo + ' ' + sexo;
+        return  id_alumno + ' ' +nombre + ' ' + appellido_paterno + ' ' + appellido_materno+ ' ' +  edad + ' ' + matricula + ' ' + correo + ' ' + sexo;
     }
 
     public String getNombre() {
