@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<!-- ===== ESTILOS (Bootstrap 5 + Bootstrap Icons vía CDN) ===== -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
@@ -12,9 +11,11 @@
         </div>
 
         <div class="col-md-7">
-            <div class="row">
-                <h4 class="text-secondary col-6">Aquí están todos  los registros de los alumnos</h4>
-                <a href="Alumno" class="btn btn-primary col-6 align-content-center text-center carga"><i class="bi bi-arrow-clockwise"></i> Cargar Alumnos</a>
+            <div class="row align-items-center">
+                <h4 class="text-secondary col-sm-6 mb-2 mb-sm-0">Aquí están todos los registros de los alumnos</h4>
+                <div class="col-sm-6 text-sm-end">
+                    <a href="${pageContext.request.contextPath}/alumnos" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i> Cargar Alumnos</a>
+                </div>
             </div>
 
             <c:choose>
@@ -34,9 +35,11 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
-                                <th>Matricula</th>
-                                <th>Correo electronico</th>
-                                <th>Sexo </th>
+                                <th>Edad</th>
+                                <th>Matrícula</th>
+                                <th>Correo Electrónico</th>
+                                <th>Sexo</th>
+                                <th>Registrado</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -44,15 +47,16 @@
                                 <tr>
                                     <td><strong>${alumnos.id}</strong></td>
                                     <td>${alumnos.nombre}</td>
-                                    <td><span class="badge bg-secondary">${alumnos.Apellidos}</span></td>
+                                        <%-- CORRECCIÓN 1: Se cambiaron los nombres de las propiedades a minúsculas camelCase comunes en Java Beans --%>
+                                    <td>${alumnos.apellidoP} ${alumnos.apellidoM}</td>
                                     <td>${alumnos.edad} años</td>
-                                    <td>${alumnos.Matricula}</td>
-                                    <td>
-                                            ${alumnos.correo}"
-                                    </td>
+                                    <td><span class="badge bg-secondary">${alumnos.matricula}</span></td>
+                                    <td>${alumnos.correo}</td>
+                                        <%-- CORRECCIÓN 2: Se corrigió "Sexo" por "sexo" en minúscula para evitar errores con los Getters de Java --%>
+                                    <td>${alumnos.sexo}</td>
                                     <td>
                                         <c:choose>
-                                            <c:when test="${alumnos.sexo}">
+                                            <c:when test="${alumnos.registro}">
                                                 <span class="text-success"><i class="bi bi-check-circle-fill"></i> Sí</span>
                                             </c:when>
                                             <c:otherwise>
@@ -74,7 +78,7 @@
                 <div class="card-body">
                     <h4 class="card-title text-primary mb-4"><i class="bi bi-plus-circle-fill"></i> ¡Registro de Alumnos!</h4>
 
-                    <form action="alumnos" method="POST">
+                    <form action="${pageContext.request.contextPath}/alumnos" method="POST">
                         <input type="hidden" name="action" value="create">
 
                         <div class="mb-3">
@@ -82,26 +86,32 @@
                             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej: Luis" required>
                         </div>
                         <div class="mb-3">
-                            <label for="apellidos" class="form-label">Apellidos del Alumno</label>
-                            <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ej: Perez Lopez" required>
+                            <label for="apellidoP" class="form-label">Apellido Paterno</label>
+                            <input type="text" class="form-control" id="apellidoP" name="apellidoP" placeholder="Ej: Perez" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellidoM" class="form-label">Apellido Materno</label>
+                            <input type="text" class="form-control" id="apellidoM" name="apellidoM" placeholder="Ej: Lopez" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="edad" class="form-label">Edad (Años)</label>
-                            <input type="number" class="form-control" id="edad" name="edad" placeholder="Ej: 3" required min="0" max="120">
+                            <input type="number" class="form-control" id="edad" name="edad" placeholder="Ej: 22" required min="0" max="120">
                         </div>
 
                         <div class="mb-3">
-                            <label for="matricula" class="form-label">matricula </label>
+                            <label for="matricula" class="form-label">Matrícula</label>
                             <input type="text" class="form-control" id="matricula" name="matricula" placeholder="Ej: 20253ds067" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="correo" class="form-label">Correo Electronico </label>
-                            <input type="text" class="form-control" id="correo" name="correo" placeholder="Ej: 20253ds067@utez.edu.mz" required>
+                            <label for="correo" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="correo" name="correo" placeholder="Ej: 20253ds067@utez.edu.mz" required>
                         </div>
+
                         <div class="mb-3">
                             <label for="Sexo" class="form-label">Sexo</label>
+                            <%-- RECOMENDACIÓN: Mantenemos el name como "Sexo" si el backend lo lee con mayúscula, pero es preferible usar "sexo" en minúsculas --%>
                             <select class="form-select" id="Sexo" name="Sexo" required>
                                 <option value="" selected disabled>Selecciona una opción...</option>
                                 <option value="Masculino">Masculino</option>
@@ -115,7 +125,7 @@
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary carga"><i class="bi bi-save"></i> Guardar</button>
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
                         </div>
                     </form>
                 </div>
@@ -124,5 +134,4 @@
     </div>
 </div>
 
-<!-- ===== JS de Bootstrap (necesario para dropdowns, modales, switches, etc.) ===== -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
