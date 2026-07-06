@@ -29,6 +29,14 @@ public class Alumno {
         return  id_alumno + ' ' +nombre + ' ' + appellido_paterno + ' ' + appellido_materno+ ' ' +  edad + ' ' + matricula + ' ' + correo + ' ' + sexo;
     }
 
+    public int getId_alumno() {
+        return id_alumno;
+    }
+
+    public void setId_alumno(int id_alumno) {
+        this.id_alumno = id_alumno;
+    }
+
     public String getNombre() {
         return nombre;
     }

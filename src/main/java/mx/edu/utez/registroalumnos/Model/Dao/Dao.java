@@ -7,5 +7,7 @@ public interface Dao<T, K> {
     List<T> getAll();
     T getById(K id);
     boolean update (T t);
-    boolean delete (T t);
+    boolean delete (Integer id);
+
+    ;
 }

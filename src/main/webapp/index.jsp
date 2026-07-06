@@ -11,7 +11,7 @@
         </div>
 
         <div class="col-md-7">
-            <div class="row align-items-center">
+            <div class="row align-items-center mb-4">
                 <h4 class="text-secondary col-sm-6 mb-2 mb-sm-0">Aquí están todos los registros de los alumnos</h4>
                 <div class="col-sm-6 text-sm-end">
                     <a href="${pageContext.request.contextPath}/alumnos" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i> Cargar Alumnos</a>
@@ -34,36 +34,25 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
-                                <th>Apellidos</th>
+                                <th>Apellido paterno</th>
+                                <th>Apellido Materno</th>
                                 <th>Edad</th>
-                                <th>Matrícula</th>
-                                <th>Correo Electrónico</th>
+                                <th>Matricula</th>
+                                <th>Correo electronico</th>
                                 <th>Sexo</th>
-                                <th>Registrado</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach items="${listaAlumnos}" var="alumnos">
                                 <tr>
-                                    <td><strong>${alumnos.id}</strong></td>
+                                    <td><strong>${alumnos.id_alumno}</strong></td>
                                     <td>${alumnos.nombre}</td>
-                                        <%-- CORRECCIÓN 1: Se cambiaron los nombres de las propiedades a minúsculas camelCase comunes en Java Beans --%>
-                                    <td>${alumnos.apellidoP} ${alumnos.apellidoM}</td>
+                                    <td>${alumnos.appellido_paterno}</td>
+                                    <td>${alumnos.appellido_materno}</td>
                                     <td>${alumnos.edad} años</td>
                                     <td><span class="badge bg-secondary">${alumnos.matricula}</span></td>
                                     <td>${alumnos.correo}</td>
-                                        <%-- CORRECCIÓN 2: Se corrigió "Sexo" por "sexo" en minúscula para evitar errores con los Getters de Java --%>
                                     <td>${alumnos.sexo}</td>
-                                    <td>
-                                        <c:choose>
-                                            <c:when test="${alumnos.registro}">
-                                                <span class="text-success"><i class="bi bi-check-circle-fill"></i> Sí</span>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <span class="text-danger"><i class="bi bi-x-circle-fill"></i> No</span>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -86,12 +75,12 @@
                             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej: Luis" required>
                         </div>
                         <div class="mb-3">
-                            <label for="apellidoP" class="form-label">Apellido Paterno</label>
-                            <input type="text" class="form-control" id="apellidoP" name="apellidoP" placeholder="Ej: Perez" required>
+                            <label for="appellido_paterno" class="form-label">Apellido paterno del Alumno</label>
+                            <input type="text" class="form-control" id="appellido_paterno" name="appellido_paterno" placeholder="Ej: Perez" required>
                         </div>
                         <div class="mb-3">
-                            <label for="apellidoM" class="form-label">Apellido Materno</label>
-                            <input type="text" class="form-control" id="apellidoM" name="apellidoM" placeholder="Ej: Lopez" required>
+                            <label for="appellido_materno" class="form-label">Apellido materno del Alumno</label>
+                            <input type="text" class="form-control" id="appellido_materno" name="appellido_materno" placeholder="Ej: Lopez" required>
                         </div>
 
                         <div class="mb-3">
@@ -110,12 +99,12 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="Sexo" class="form-label">Sexo</label>
-                            <%-- RECOMENDACIÓN: Mantenemos el name como "Sexo" si el backend lo lee con mayúscula, pero es preferible usar "sexo" en minúsculas --%>
-                            <select class="form-select" id="Sexo" name="Sexo" required>
+                            <label for="sexo" class="form-label">Sexo</label>
+                            <%-- Ajustado name a "sexo" en minúscula para hacer match exacto con tu request.getParameter("sexo") --%>
+                            <select class="form-select" id="sexo" name="sexo" required>
                                 <option value="" selected disabled>Selecciona una opción...</option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Femenino">Femenino</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
                             </select>
                         </div>
 
