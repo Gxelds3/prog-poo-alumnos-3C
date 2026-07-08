@@ -20,11 +20,11 @@ public class AlumnoDao implements Dao<Alumno, Integer> {
 
             ps.setString(1, entidad.getNombre());
             ps.setString(2, entidad.getAppellido_paterno());
-            ps.setString(2, entidad.getAppellido_materno());
-            ps.setInt( 3, entidad.getEdad());
-            ps.setString(4, entidad.getMatricula());
-            ps.setString(5, entidad.getSexo());
-            ps.setString(6, entidad.getCorreo());
+            ps.setString(3, entidad.getAppellido_materno());
+            ps.setInt(4, entidad.getEdad());
+            ps.setString(5, entidad.getMatricula());
+            ps.setString(6, entidad.getSexo());
+            ps.setString(7, entidad.getCorreo());
 
             int filasAfectadas = ps.executeUpdate();
             return filasAfectadas > 0;
@@ -101,11 +101,12 @@ public class AlumnoDao implements Dao<Alumno, Integer> {
 
             ps.setString(1, entidad.getNombre());
             ps.setString(2, entidad.getAppellido_paterno());
-            ps.setString(2, entidad.getAppellido_materno());
-            ps.setInt( 3, entidad.getEdad());
-            ps.setString(4, entidad.getMatricula());
-            ps.setString(5, entidad.getSexo());
+            ps.setString(3, entidad.getAppellido_materno());
+            ps.setInt(4, entidad.getEdad());
+            ps.setString(5, entidad.getMatricula());
             ps.setString(6, entidad.getCorreo());
+            ps.setString(7, entidad.getSexo());
+            ps.setInt(8, entidad.getId_alumno());
 
             int filasAfectadas = ps.executeUpdate();
             return filasAfectadas > 0;
